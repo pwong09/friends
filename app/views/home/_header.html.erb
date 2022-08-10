@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <%= link_to 'PW Friend App', root_path, class: "navbar-brand" %>
     <%# <a class="navbar-brand" href="#">PW Friend App</a> %>
@@ -8,15 +8,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <%= link_to 'About Us', home_about_path, class:"nav-link"%>
-            <%# <a class="nav-link" href="#">Link</a> %>
+          <%= link_to 'About Us', home_about_path, class:"nav-link"%>
+          <%# <a class="nav-link" href="#">Link</a> %>
         </li>
-        <li class="nav-item">
+        <% if user_signed_in? %>
+          <li class="nav-item">
             <%= link_to 'Friends', friends_path, class:"nav-link"%>
-        </li>
-        <li class="nav-item">
+          </li>          <li class="nav-item">
             <%= link_to 'Add Friend', new_friend_path, class:"nav-link"%>
-        </li>
+          </li>
+          <li class="nav-item">
+            <%= button_to 'Sign Out', destroy_user_session_path, method: :delete, class:"nav-link"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Edit Profile', edit_user_registration_path, class:"nav-link"%>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Sign Up', new_user_registration_path, class:"nav-link"%>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign In', new_user_session_path, class:"nav-link"%>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
